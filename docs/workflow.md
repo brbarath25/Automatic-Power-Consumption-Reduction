@@ -2,51 +2,30 @@
 
 ## Overview
 
-The Automatic Power Consumption Reduction System combines camera-based person detection, MQTT communication, and a Node-RED dashboard to support monitoring and control of electrical devices.
+The Automatic Power Consumption Reduction System combines computer vision, MQTT communication, and Node-RED to support occupancy-based energy management.
 
 ## Workflow Steps
 
-### Step 1: Capture Video
-A webcam captures video of the monitored area.
+1. **Image Capture:** A webcam captures images of the room.
+2. **Person Detection:** OpenCV runs the MobileNet SSD model to detect people in the captured frames.
+3. **People Counting:** The Python program counts the detected people in each frame.
+4. **MQTT Communication:** The program publishes the people count to the `person_count` MQTT topic.
+5. **Dashboard Monitoring:** Node-RED can subscribe to `person_count` to display the current occupancy.
+6. **Automation:** Node-RED can apply rules based on occupancy and send MQTT commands to control lights and fans.
+7. **Device Control:** MQTT messages use the topics `lig1`, `lig2`, `fan1`, and `fan2` for the corresponding devices.
 
-### Step 2: Detect People
-The Python program uses OpenCV and the MobileNet SSD model to detect people in each video frame and calculate a person count.
+## System Requirements
 
-### Step 3: Publish the Person Count
-The Python program publishes the detected person count to the MQTT topic:
+- Webcam
+- Python
+- OpenCV
+- MobileNet SSD model files
+- MQTT broker
+- Node-RED
+- Compatible device controllers and relay hardware for physical switching
 
-`person_count`
+## Important Note
 
-### Step 4: Receive MQTT Messages
-The MQTT broker carries messages between the Python program and the configured Node-RED flow.
+The Python program publishes the detected people count to `person_count`. The Node-RED flow must be configured to subscribe to this topic and implement the required automation rules.
 
-### Step 5: Monitor the System
-Node-RED can display monitoring information through its dashboard. The provided flow screenshot includes temperature and humidity displays and controls for two lights and two fans.
-
-### Step 6: Control Devices
-The device-control topics used by the Python project are:
-
-- `lig1` - Light 1
-- `lig2` - Light 2
-- `fan1` - Fan 1
-- `fan2` - Fan 2
-
-The Node-RED automation rules must be configured to use the person count and publish the appropriate device commands.
-
-## Important Implementation Note
-
-The current Python program publishes the person count to `person_count`. The original device-control logic publishes `on` or `off` commands to the four device topics. These are separate message flows.
-
-For automatic operation, the Node-RED flow must connect the person-count input to the required automation rules and device outputs. Confirm the flow configuration and test the behavior before describing the system as fully automated.
-
-## Temperature and Humidity
-
-The Node-RED flow screenshot also shows temperature and humidity monitoring using the DHT11 sensor. The actual sensor wiring and MQTT input configuration should be verified against the working setup.
-
-## Future Improvements
-
-- Improve person-detection accuracy.
-- Add and test person-count-based automation rules.
-- Verify MQTT communication and device responses.
-- Test manual dashboard controls alongside automatic control.
-- Evaluate electricity savings using measured data.
+Hardware connections, MQTT communication, and automatic device control must be tested before the system is considered fully operational.
