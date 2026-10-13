@@ -45,6 +45,12 @@ The system detects room occupancy and uses automation rules to control electrica
 
 The Node-RED dashboard includes temperature and humidity displays, device switches, and MQTT-connected nodes.
 
+## Node-RED Dashboard
+
+The Node-RED flow includes temperature and humidity monitoring, switches for lights and fans, and MQTT communication.
+
+![Node-RED Dashboard Flow](node-red-flow.png)
+
 ## Hardware Components
 
 - Raspberry Pi
@@ -59,14 +65,20 @@ The Node-RED dashboard includes temperature and humidity displays, device switch
 
 ```text
 Automatic-Power-Consumption-Reduction/
+├── code/
+│   └── person_detection_mqtt.py
+├── docs/
+│   ├── workflow.md
+│   └── node-red-flow.md
+├── hardware/
+│   └── components.md
+├── models/
+│   ├── MobileNetSSD_deploy.caffemodel
+│   ├── MobileNetSSD_deploy.prototxt
+│   └── README.md
 ├── README.md
 ├── requirements.txt
-├── code/
-├── node-red/
-├── models/
-├── hardware/
-├── docs/
-└── images/
+└── node-red-flow.png
 ```
 
 ## Future Enhancements
