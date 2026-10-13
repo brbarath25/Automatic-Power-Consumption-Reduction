@@ -1,28 +1,18 @@
-# MobileNet SSD Model Files
+# Machine Learning Models
 
-This project uses the pre-trained MobileNet SSD model with OpenCV's Caffe interface for webcam-based person detection.
+This folder contains the MobileNet SSD model files used for person detection.
 
 ## Required Files
 
-- `MobileNetSSD_deploy.prototxt`
-- `MobileNetSSD_deploy.caffemodel`
+- `MobileNetSSD_deploy.prototxt`: Defines the model architecture.
+- `MobileNetSSD_deploy.caffemodel`: Contains the trained model weights.
 
-## File Locations
+## Usage
 
-Place both files in this directory:
+The Python program loads these files using OpenCV's deep neural network module to detect people in webcam frames.
 
-```text
-models/
-├── MobileNetSSD_deploy.prototxt
-└── MobileNetSSD_deploy.caffemodel
-```
+## Notes
 
-## Setup
-
-Obtain the compatible MobileNet SSD Caffe model files from a trusted source. Verify the source and licensing before downloading or redistributing them.
-
-The Python program expects these exact filenames and paths.
-
-## Status
-
-The model files must be obtained and tested before running the person-detection program.
+- Keep both model files in this folder.
+- The filenames must match those used in `person_detection_mqtt.py`.
+- Model compatibility and person-detection accuracy should be verified by testing the program.
