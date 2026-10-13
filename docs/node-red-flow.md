@@ -2,40 +2,42 @@
 
 ## Overview
 
-This document describes the Node-RED flow shown in the project's screenshot.
+Node-RED is used for dashboard monitoring, MQTT communication, and automation in the Automatic Power Consumption Reduction System.
 
-## Temperature and Humidity
+## Dashboard Features
 
-The flow includes an MQTT input labelled `TH`. It connects to two function nodes, `temp` and `hum`, which feed the Temperature and Humidity dashboard displays.
+The documented Node-RED flow includes:
 
-## Light Controls
+- Temperature monitoring
+- Humidity monitoring
+- Light 1 control
+- Light 2 control
+- Fan 1 control
+- Fan 2 control
+- MQTT input and output nodes
 
-The dashboard contains two switches:
+## MQTT Topics
 
-- **Light 1:** Associated with MQTT topic `lig1` and a function node labelled `lig1 1`.
-- **Light 2:** Associated with MQTT topic `lig2` and a function node labelled `lig 2`.
+| Device or Data | MQTT Topic |
+|---|---|
+| Person count | `person_count` |
+| Light 1 | `lig1` |
+| Light 2 | `lig2` |
+| Fan 1 | `fan1` |
+| Fan 2 | `fan2` |
 
-The screenshot also shows audio output nodes connected to the function nodes.
+## Person Count Integration
 
-## Fan Controls
+The Python program publishes the detected people count to the `person_count` topic.
 
-The dashboard contains two switches:
+To display this value, configure an MQTT input node in Node-RED to subscribe to `person_count` and connect it to a suitable dashboard display.
 
-- **Fan 1:** Associated with MQTT topic `fan1` and a function node labelled `fan 1`.
-- **Fan 2:** Associated with MQTT topic `fan2` and a function node labelled `fan 2`.
+## Automation Logic
 
-The screenshot also shows audio output nodes connected to the function nodes.
+Node-RED can use the received person count to apply occupancy-based rules and publish commands to the device topics.
 
-## Dashboard
+The automation rules must be configured according to the project's requirements and tested with the actual hardware.
 
-The screenshot shows two UI countdown switches, dashboard controls for the lights and fans, and temperature and humidity displays.
+## Important Note
 
-## Relationship to the Python Program
-
-The Python person-detection program publishes a person count to the MQTT topic `person_count`. The screenshot does not show a `person_count` input or the complete automation logic that connects person detection to the device controls.
-
-The integration between person-count messages and automatic device control must be configured and tested separately.
-
-## Project File Status
-
-This repository includes a screenshot for visual reference. The original Node-RED flow export in JSON format has not been provided, so the screenshot cannot be imported as a working Node-RED flow.
+The repository contains a screenshot of the Node-RED flow for reference. The screenshot is not an importable Node-RED flow export. The complete flow configuration and the connection between `person_count` and the dashboard must be verified separately.
