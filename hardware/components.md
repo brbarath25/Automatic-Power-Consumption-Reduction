@@ -1,40 +1,37 @@
 # Hardware Components
 
-## Project Overview
+## Overview
 
-The Automatic Power Consumption Reduction System uses camera-based person detection and IoT-based device control to help reduce unnecessary electricity consumption in classrooms, laboratories, and other campus areas.
+The Automatic Power Consumption Reduction System is designed to support occupancy-based control of electrical appliances in classrooms, laboratories, and other buildings.
 
-## Components Used
+## Components and Their Roles
 
-### 1. Webcam
-Captures video of the monitored area. The video is processed by the person-detection program to estimate the number of people present.
+| Component | Purpose |
+|---|---|
+| Raspberry Pi | Runs the person-detection program, if used in the implementation |
+| Webcam | Captures room images for person detection |
+| Relay module | Switches electrical appliances through a suitable control circuit |
+| Lights | Appliances targeted for automatic control |
+| Fans | Appliances targeted for automatic control |
+| ESP8266 / ESP32 | Provides device connectivity and control, if used |
+| DHT11 sensor | Measures temperature and humidity |
+| Connecting wires | Connects components in the circuit |
+| Suitable power supply | Supplies the required power to the hardware |
 
-### 2. Raspberry Pi
-Runs the Python person-detection program and communicates with the MQTT broker to send person-count information.
+## Software and Communication
 
-### 3. ESP8266 / ESP32
-Provides Wi-Fi-based communication for IoT device control. The exact board and its configuration should be confirmed according to the hardware setup.
+- Python and OpenCV for person detection
+- MobileNet SSD for object detection
+- MQTT for message communication
+- Node-RED for dashboard monitoring and automation
 
-### 4. Relay Module
-Acts as a switching interface for controlling connected electrical devices. The actual relay wiring and control logic must be verified against the implemented circuit.
+## Safety Considerations
 
-### 5. DHT11 Sensor
-Measures temperature and humidity. These readings can be monitored through the Node-RED dashboard when the sensor and MQTT data flow are configured.
+- Use a relay module suitable for the connected load.
+- Ensure proper insulation and electrical isolation.
+- Mains electrical wiring should be handled by a qualified person.
+- Verify all hardware connections before powering the circuit.
 
-### 6. Lights and Fans
-These are the devices targeted for automated control. The current project code uses the MQTT topics `lig1`, `lig2`, `fan1`, and `fan2`.
+## Implementation Note
 
-## System Notes
-
-- The webcam and person-detection program estimate the number of people in the monitored area.
-- MQTT carries messages between the system components.
-- Node-RED can provide a dashboard for monitoring and device-control functions.
-- Confirm the actual hardware connections, pin assignments, power requirements, and automation rules before testing.
-
-## Electrical Safety
-
-Mains-powered lights and fans can cause serious electric shock or fire if wired incorrectly. Do not connect or modify mains wiring while powered. Have the relay circuit and electrical connections checked by a qualified person.
-
-## Implementation Status
-
-The component list is based on the project presentation and the supplied software and Node-RED details. Confirm which boards and components were physically assembled and tested before marking the hardware implementation as complete.
+The exact hardware configuration depends on the components used in the physical implementation. The listed components and their connections must be verified against the actual circuit before deployment.
