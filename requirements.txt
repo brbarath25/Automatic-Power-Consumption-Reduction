@@ -1,3 +1,8 @@
+# OpenCV library for image processing and camera operations
 opencv-python
+
+# NumPy library for numerical calculations and array manipulation
 numpy
+
+# Paho MQTT library for sending and receiving messages using MQTT
 paho-mqtt
